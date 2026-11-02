@@ -1,0 +1,44 @@
+project_root: auto
+data_root: auto
+output_root: outputs
+dataset: mvtec
+category: bottle
+
+backbone: wide_resnet50_2
+layers: ["layer2", "layer3"]
+image_size: 64
+batch_size: 1
+num_workers: 0
+device: cuda
+use_fp16: true
+
+knn_k: 1
+coreset_ratio: 0.03
+max_memory_patches: 8000
+score_memory_limit: 128
+
+threshold_method: normal_percentile
+threshold_percentile: 99.0
+threshold_sample_limit: 30
+random_seed: 42
+
+speed_mode: true
+extreme_speed_mode: true
+coarse_only: true
+coarse_to_fine: false
+no_save_visuals: true
+save_heatmap: false
+save_mask: false
+save_overlay: false
+heatmap_output_size: 512
+
+use_calibrated_threshold: false
+use_defect_direction: false
+defect_alpha: 0.5
+defect_top_ratio: 0.05
+
+use_tiling: false
+tile_size: 2500
+tile_overlap: 0
+tile_batch_size: 1
+tile_fusion: max

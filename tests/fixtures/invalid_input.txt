@@ -1,0 +1,1 @@
+This is intentionally not an image. It verifies that the API returns a readable unsupported-file error.

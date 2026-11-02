@@ -1,0 +1,16 @@
+# Candidate overlay only. Do not overwrite speed_mode.yaml or accuracy configs.
+# Run build_memory with this overlay to make spatial stratification take effect;
+# loading an existing legacy memory_bank.pt cannot reconstruct source spatial IDs.
+coreset_strategy: stratified_spatial
+max_memory_patches: 512
+score_memory_limit: 512
+score_memory_strategy: random
+coreset_pre_sample_per_image: 32
+coreset_candidate_limit: 4096
+coreset_kmeans_batch_size: 1024
+coreset_kmeans_max_iter: 20
+random_seed: 42
+memory_backend: faiss_gpu_flat
+memory_backend_fallback: torch_gpu_flat
+candidate_selection_status: eligible
+candidate_selection_evidence: outputs/optimization/coreset/accuracy_speed_tradeoff.csv

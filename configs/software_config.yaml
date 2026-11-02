@@ -1,0 +1,13 @@
+# auto：使用当前 AdaptiveAOI 作为统一前端、后端和算法项目根目录。
+algorithm_project_root: auto
+fallback_algorithm_project_root: ''
+# 外部数据和独立算法解释器均可由当前进程环境变量覆盖；不修改 Windows 全局环境变量。
+data_root: ${ADAPTIVEAOI_DATA_ROOT:-auto}
+default_dataset: mvtec
+default_category: bottle
+# 默认算法配置；首次运行请构建本地目标域记忆库。
+default_config: configs/final_balanced.yaml
+output_root: outputs/demo_results
+device: cuda
+algorithm_python: ${ADAPTIVEAOI_ALGORITHM_PYTHON:-}
+integration_api_url: ${ADAPTIVEAOI_INTEGRATION_API_URL:-http://127.0.0.1:8000}

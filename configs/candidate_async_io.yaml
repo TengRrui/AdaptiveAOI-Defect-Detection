@@ -1,0 +1,6 @@
+async_prefetch: true
+prefetch_queue_size: 2
+pin_memory: true
+non_blocking_transfer: true
+candidate_evidence: outputs/optimization/async_io/benchmark.csv
+continuous_different_image_gain: 0.3713199699216634

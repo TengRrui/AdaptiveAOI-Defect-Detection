@@ -1,0 +1,74 @@
+# Integration service configuration. Environment variables override local values.
+paths:
+  project_root: auto
+  data_root: ${ADAPTIVEAOI_DATA_ROOT:-}
+  runtime_root: outputs/system_runtime
+  upload_root: outputs/system_runtime/uploads
+  jobs_root: outputs/system_runtime/jobs
+  log_root: outputs/system_runtime/logs
+  experiment_root: outputs/results
+  algorithm_outputs_root: outputs
+  memory_banks_root: artifacts/memory_banks
+  config_profiles_root: configs/profiles
+
+backend:
+  host: ${ADAPTIVEAOI_BACKEND_HOST:-127.0.0.1}
+  port: ${ADAPTIVEAOI_BACKEND_PORT:-8000}
+  debug: ${ADAPTIVEAOI_DEBUG:-false}
+  version: 1.0.0
+  cors_origins:
+    - http://127.0.0.1:8501
+    - http://localhost:8501
+
+models:
+  patchcore-default:
+    display_name: AdaptiveAOI 默认正常记忆检测
+    profile: configs/default.yaml
+    model_type: patchcore
+  patchcore-mvtec:
+    display_name: AdaptiveAOI MVTec 正常记忆检测
+    profile: configs/mvtec.yaml
+    model_type: patchcore
+  patchcore-mvtec-final:
+    display_name: AdaptiveAOI MVTec 平衡方案
+    profile: configs/final_balanced.yaml
+    model_type: patchcore
+  patchcore-visa:
+    display_name: AdaptiveAOI VisA 正常记忆检测
+    profile: configs/visa.yaml
+    model_type: patchcore
+  patchcore-dagm:
+    display_name: AdaptiveAOI DAGM 正常记忆检测
+    profile: configs/dagm.yaml
+    model_type: patchcore
+
+defaults:
+  # 与当前 System 内统一前端配置保持一致的默认运行方案。
+  model_id: patchcore-mvtec-final
+  dataset: mvtec
+  category: bottle
+  device: auto
+  threshold: null
+  save_original: true
+  save_visuals: true
+  batch_size: 1
+  max_upload_mb: 25
+  max_batch_files: 5000
+  supported_image_formats:
+    - .png
+    - .jpg
+    - .jpeg
+    - .bmp
+    - .tif
+    - .tiff
+    - .webp
+
+runtime:
+  allow_cpu_fallback: true
+  max_cached_runtimes: 1
+  serialize_inference: true
+  log_level: INFO
+  job_retention_days: 14
+
+compatibility:
+  legacy_cli_bridge_enabled: true

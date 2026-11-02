@@ -1,0 +1,7 @@
+project_root: auto
+# 外部资源的单一配置入口；可由当前进程的 ADAPTIVEAOI_DATA_ROOT 覆盖，不会修改 Windows 全局环境变量。
+data_root: ${ADAPTIVEAOI_DATA_ROOT:-}
+mvtec_root:
+visa_root:
+output_root: outputs
+num_workers: 0

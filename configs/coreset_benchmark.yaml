@@ -1,0 +1,47 @@
+# Fixed protocol for normal-memory coverage experiments.  It never recalibrates
+# thresholds and uses existing per-category memory metadata as the threshold source.
+project_root: auto
+data_root: auto
+output_root: outputs
+device: cuda
+backbone: wide_resnet50_2
+layers: ["layer2", "layer3"]
+image_size: 256
+use_fp16: false
+knn_k: 1
+random_seed: 42
+memory_backend: faiss_gpu_flat
+memory_backend_fallback: torch_gpu_flat
+torch_gpu_chunk_size: 0
+categories:
+  mvtec: [bottle, screw]
+  visa: [candle, macaroni1]
+  dagm: [Class1, Class6, Class8]
+strategies: [random, stratified_spatial, minibatch_kmeans]
+memory_sizes: [128, 256, 512, 1024, 2048, 4096]
+# Normal training features are pre-sampled before more expensive selection.
+candidate_per_image: 32
+candidate_limit: 4096
+coverage_per_image: 16
+coverage_limit: 2048
+kmeans_batch_size: 1024
+kmeans_max_iter: 20
+# Fixed, label-balanced report subset. Test labels are solely consumed for metrics.
+eval_normal_count: 10
+eval_anomaly_count: 10
+speed_image_size: 2500
+speed_warmup: 3
+speed_runs: 10
+use_tiling: false
+save_heatmap: false
+save_mask: false
+save_overlay: false
+no_save_visuals: true
+use_calibrated_threshold: false
+use_defect_direction: false
+top_ratio: 0.01
+selection_constraints:
+  max_recall_drop: 0.03
+  max_small_defect_recall_drop: 0.03
+  max_f1_drop: 0.03
+  max_speed_regression: 0.05

@@ -1,0 +1,70 @@
+project_root: auto
+data_root: auto
+output_root: outputs
+
+# Fixed algorithm configuration. It matches the existing representative memory banks.
+dataset: mvtec
+category: bottle
+backbone: wide_resnet50_2
+layers: ["layer2", "layer3"]
+image_size: 256
+batch_size: 1
+num_workers: 0
+device: cuda
+use_fp16: false
+random_seed: 42
+
+knn_k: 1
+coreset_ratio: 0.1
+max_memory_patches: 20000
+score_memory_limit: 0
+
+threshold_method: normal_percentile
+threshold_percentile: 99.0
+threshold_sample_limit: 40
+use_calibrated_threshold: false
+use_defect_direction: false
+defect_alpha: 0.5
+defect_top_ratio: 0.05
+
+use_tiling: false
+tile_size: 768
+tile_overlap: 128
+tile_batch_size: 1
+tile_fusion: max
+heatmap_output_size: 0
+
+save_heatmap: true
+save_mask: true
+save_overlay: true
+no_save_visuals: false
+
+benchmark:
+  input_size: 2500
+  input_mode: resize_to_2500
+  warmup: 20
+  runs: 100
+  runs_scope: total_calls_per_timing_mode_cycling_fixed_manifest
+  batch_size: 1
+  timing_modes: ["strict_total", "no_save_total", "online_total", "detection_only"]
+  sanity_samples_per_label: 10
+
+benchmark_cases:
+  - dataset: mvtec
+    category: bottle
+    source_image_path: 'mvtec/bottle/test/good/000.png'
+    memory_bank_path: 'outputs/checkpoints/mvtec/bottle/memory_bank.pt'
+    original_memory_size: 214016
+    scoring_memory_size: 19855
+  - dataset: visa
+    category: candle
+    source_image_path: 'VisA/candle/Data/Images/Normal/0011.JPG'
+    memory_bank_path: 'outputs/checkpoints/visa/candle/memory_bank.pt'
+    original_memory_size: 921600
+    scoring_memory_size: 19800
+  - dataset: dagm
+    category: Class1
+    source_image_path: 'DAGM/Class1/Test/0001.PNG'
+    memory_bank_path: 'outputs/checkpoints/dagm/Class1/memory_bank.pt'
+    original_memory_size: 507904
+    scoring_memory_size: 19840

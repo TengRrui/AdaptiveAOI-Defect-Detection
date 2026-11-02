@@ -1,0 +1,25 @@
+base_config: final_speed_baseline.yaml
+
+# One representative category keeps the backend ablation focused on kNN rather
+# than dataset-specific threshold tuning. The input comes from the final baseline manifest.
+dataset: mvtec
+category: bottle
+memory_backend_cpu: faiss_cpu_flat
+memory_backend_gpu: faiss_gpu_flat
+memory_backend_fallback: torch_gpu_flat
+memory_ivf_nlist: 256
+memory_ivf_nprobe: 32
+torch_gpu_chunk_size: 0
+
+score_memory_sizes: [128, 256, 512, 1024, 2048, 4096, 0]
+warmup: 20
+runs: 100
+timing_modes: ["online_total", "detection_only"]
+sanity_samples_per_label: 10
+random_seed: 42
+
+accuracy_tolerance:
+  I-AUROC_drop: 0.005
+  F1_drop: 0.01
+  Precision_drop: 0.01
+  Recall_drop: 0.01

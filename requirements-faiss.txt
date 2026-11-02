@@ -1,0 +1,2 @@
+# Optional CPU FAISS accelerator; sklearn remains available without this package.
+faiss-cpu==1.14.2

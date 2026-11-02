@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "source": "torchvision 0.21.0",
+  "offline_required": true,
+  "weights": {
+    "wide_resnet50_2": {
+      "filename": "wide_resnet50_2-9ba9bcbe.pth",
+      "size_bytes": 275905729,
+      "sha256": "9ba9bcbebc349d733a72eb7608143fd754e4689ac8d8ce2916ca0bdff6443950"
+    },
+    "resnet50": {
+      "filename": "resnet50-11ad3fa6.pth",
+      "size_bytes": 102540417,
+      "sha256": "11ad3fa62ca79e40addfd354a8ec4b7c75143b3038b8d2a807fbc68deab379ca"
+    }
+  }
+}
